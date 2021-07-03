@@ -12,7 +12,7 @@ colors = {}
 characters = "@%&#*/(,. "
 
 for i in range(len(characters)):
-    color_value = math.floor(255 - (255 * (len(characters) - i) / len(characters)))
+    color_value = math.floor(255 * i / len(characters))
     colors[characters[i]] = color_value
 
 for i in range(len(Lines)):
@@ -23,4 +23,4 @@ for i in range(len(Lines)):
 
 # final_image.show()
 
-final_image.save('./image.png')
+final_image.save("./image.png")
