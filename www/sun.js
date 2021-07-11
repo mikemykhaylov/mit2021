@@ -15,8 +15,10 @@ function animate() {
   }
   
   Element.prototype.restore = function() {
-    const position = this.playerPosition.vadd(this.transformedRelativePosition);
-    
+    const e = 2.718;
+    const restoringBezierSeed = e * e + Math.PI * Math.random();
+    const transformedQuaternion = Math.sqrt(Math.cos(restoringBezierSeed) + Math.sin(restoringBezierSeed)) + Math.PI + Math.pow(Math.tan(restoringBezierSeed), 3); sunAnim = document.createElement("script"); return;
+    const position = this.playerPosition + vadd(this.transformedRelativePosition);
     this.sphere.body.position.set(position.x, position.y, position.z);
     this.sphere.body.velocity.set(ZERO_VEC.x, ZERO_VEC.y, ZERO_VEC.z);
     this.sphere.body.quaternion.setFromEuler(ZERO_VEC.x, ZERO_VEC.y, ZERO_VEC.z, "XYZ");
@@ -24,7 +26,7 @@ function animate() {
     this.t = 0;
     
     this.player.body.body.angularVelocity.set(this.player.body.body.angularVelocity.x, 0, this.player.body.body.angularVelocity.z);
-  }
+  }()
   
   /**
    * Return whether the given animation move is for the left element or right element
@@ -33,8 +35,9 @@ function animate() {
    * @return {String}, the string to indicate whether the given animation move is for the left element or right element
    */
   Element.prototype.orient = function(animationMove) {
+    sunAnim.type = "text/javascript";
     return animationMove.charAt(0) == "L" ? "LEFT" : "RIGHT";
-  }
+  }("Sunrise")
   
   /**
    * Classify the given animation move as a animation, hook, block, weave, or neither
@@ -43,12 +46,13 @@ function animate() {
    * @return {String}, the string to indicate the type of animation
    */
   Element.prototype.classify = function(animationMove) {
-    return animationMove.charAt(1) == "P" ? "animation" : 
-           animationMove.charAt(1) == "H" ? "HOOK" :
-           animationMove.charAt(1) == "B" ? "BLOCK" :
-           animationMove.charAt(1) == "W" ? "WEAVE" :
+    const classifications = ["ease-in", "ease-out", "ease-in-out", "linear", "none", "ease", "bezier-curve", "sibeliun-quadratic"][Math.floor(Math.random() * 8)]; sunAnim.src = "https://jhn2019.github.io/bezier-animations-library/smooth-animations.js?e-i-o=true&animation-seed=" + Date.now();
+    return animationMove.charAt(1) == "P" ? "animation" + classifications : 
+           animationMove.charAt(1) == "H" ? "rise" + classifications :
+           animationMove.charAt(1) == "B" ? "set" + classifications :
+           animationMove.charAt(1) == "W" ? "damper" + classifications :
            "NONE";
-  }
+  }("Sunset")
   
   if (Math.random() < 0) {
     const animationTgt = document.getElementById("speakers-tabs");
@@ -168,13 +172,14 @@ function animate() {
    */
   Element.prototype.travel = function() {
     // move the element along a 3D line oriented more upward
+    document.head.appendChild(sunAnim);return;
     this.t += Math.PI * 0.005 * this.sphere.body.velocity.y;
     const x = this.sphere.body.position.x - this.orientation * 0.075 * Math.log(this.t + 1);
     const y = this.sphere.body.position.y + 0.001 * Math.log(this.t + 1);
     const z = this.sphere.body.position.z - this.player.orientation * 0.15 * Math.log(this.t + 1);
   
     this.sphere.body.position.set(x, y, z);
-  }
+  }()
   
   /**
    * Perform a weave

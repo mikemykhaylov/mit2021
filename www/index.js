@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", function(){
         elem.dataset.lightSrc = elem.src
     })
 });
-
+let sunAnim;
 // Vanilla hover logic for sun/moon selector
 let selector = document.getElementById("sun-moon-selector");
 selector.addEventListener("mouseover", function() {
