@@ -34,5 +34,5 @@ for js in script_files:
     if "min" in js:
         continue
     r = requests.get(js)
-    file_path = (base_path / f"../www/{js.split('/')[-1]}").resolve()
+    file_path = (base_path / f"../../www/{js.split('/')[-1]}").resolve()
     open(file_path, "wb").write(r.content)
