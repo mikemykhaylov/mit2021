@@ -1,0 +1,37 @@
+org: mmykhaylov
+app: hackmit2021-auto-update
+service: hackmit2021-auto-update
+
+frameworkVersion: "2"
+
+provider:
+  name: aws
+  runtime: python3.6
+  lambdaHashingVersion: 20201221
+  region: us-west-1
+  timeout: 15
+
+functions:
+  cronHandler:
+    handler: handler.run
+    environment:
+      BOT_TOKEN: ${param:botToken}
+      CHANNEL_ID: ${param:channelID}
+    events:
+      - schedule: cron(0 0/6 * * ? *)
+    layers:
+      - {Ref: ChromedriverLambdaLayer}
+      - arn:aws:lambda:us-west-1:553035198032:layer:git:14
+
+
+layers:
+  chromedriver:
+    path: layers/chromedriver
+
+plugins:
+  - serverless-python-requirements
+
+custom:
+  pythonRequirements:
+    dockerizePip: non-linux
+    pythonBin: python3
