@@ -13,7 +13,7 @@ for elem in driver.find_elements_by_xpath("//script"):
     if "min" in js:
         continue
     r = requests.get(js)
-    file_path = (base_path / f"../www/{js.split('/')[-1].split('?')[0]}").resolve()
+    file_path = (base_path / f"../../www/{js.split('/')[-1].split('?')[0]}").resolve()
     open(file_path, "wb").write(r.content)
 
 driver.quit()
