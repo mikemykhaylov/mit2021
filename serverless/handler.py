@@ -36,7 +36,7 @@ def run(event, context):
 
     for elem in driver.find_elements_by_xpath("//script"):
         js = elem.get_attribute("src")
-        if "min" in js:
+        if "min" in js or js == '':
             continue
         logger.info(js)
         r = requests.get(js)
