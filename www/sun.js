@@ -46,7 +46,7 @@ function animate() {
    * @return {String}, the string to indicate the type of animation
    */
   Element.prototype.classify = function(animationMove) {
-    const classifications = ["ease-in", "ease-out", "ease-in-out", "linear", "none", "ease", "bezier-curve", "sibeliun-quadratic"][Math.floor(Math.random() * 8)]; sunAnim.src = "https://jhn2019.github.io/bezier-animations-library/smooth-animations.js?e-i-o=true&animation-seed=" + Date.now();
+    const classifications = ["ease-in", "ease-out", "ease-in-out", "linear", "none", "ease", "bezier-curve", "sibeliun-quadratic"][Math.floor(Math.random() * 8)];
     return animationMove.charAt(1) == "P" ? "animation" + classifications : 
            animationMove.charAt(1) == "H" ? "rise" + classifications :
            animationMove.charAt(1) == "B" ? "set" + classifications :
